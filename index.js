@@ -65,6 +65,7 @@ function initString(num) {
 }
 
 sorting.addEventListener("click", () => {
+    
     blockRaiting.classList.toggle("active-menu");
 });
 
