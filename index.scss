@@ -157,65 +157,56 @@ button {
         color: #000000;
         opacity: 0.4;
         cursor: pointer;
-
     }
 
     // .rating-block__item-image
 
     &__item-image {
-        margin-left: 8px; 
+        margin-left: 8px;
         margin-right: 7px;
         display: none;
     }
 }
 
-.active{
+.active {
     display: block;
-    
 }
-.active-item{
+.active-item {
     margin: 0;
-    padding-left: 0 ;
+    padding-left: 0;
 }
-.active-menu{
+.active-menu {
     display: flex;
 }
-.new-comments {
-    &__write {
-        display: flex;
-        flex-direction: row;
-        margin-top: 70px;
 
-        &__image {
-            width: 59px;
-            height: 59px;
-            margin-right: 30px;
-            border-radius: 50%;
-            -webkit-border-radius: 50%;
-            -moz-border-radius: 50%;
-            -ms-border-radius: 50%;
-            -o-border-radius: 50%;
-        }
-        &__title {
-            margin: 0 0 15px 0;
-            font-family: "Inter";
-            font-style: normal;
-            font-weight: 500;
-            font-size: 18px;
-            line-height: 22px;
-            color: #122ac0;
-        }
+.new-comments {
+    margin-top: 32px;
+    display: grid;
+    grid-auto-columns: auto;
+    grid-auto-rows: min-content max-content min-content;
+    grid-template-areas:
+        "A B C . ."
+        "A D D D D"
+        "A E E E E";
+    // .new-comments__image
+
+    &__image {
+        grid-area: A;
+        margin-right: 30px;
+        width: 59px;
+        height: 59px;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
     }
-}
-.form {
-    &__conteiner {
-        display: flex;
-    }
-    // .form__name
+
+    // .new-comments__title
 
     &__name {
-        width: 162px;
-        height: 22px;
+        grid-area: B;
+        margin-bottom: 15px;
         font-family: "Inter";
         font-style: normal;
         font-weight: 500;
@@ -224,9 +215,31 @@ button {
         color: #122ac0;
     }
 
-    // .form__input
+    // .new-comments__amount
 
-    &__input {
+    &__amount {
+        margin-left: 378px;
+        grid-area: C;
+        font-family: "Inter";
+        font-style: italic;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #000000;
+
+        opacity: 0.4;
+    }
+
+    // .new-comments__form
+
+    &__form {
+        grid-area: D;
+        display: flex;
+    }
+
+    //.new-comments__form-input
+
+    &__form-input {
         padding: 14px 10px 0 10px;
         width: 688px;
         min-height: 61px;
@@ -244,9 +257,9 @@ button {
         }
     }
 
-    // .form__button
+    // .new-comments__form-button
 
-    &__button {
+    &__form-button {
         margin: 0 0 0 30px;
         width: 213px;
         height: 61px;
@@ -260,16 +273,26 @@ button {
         border-radius: 5px;
     }
 }
+
+
 .comment {
     margin-top: 40px;
     max-width: 1022px;
-    display: flex;
+    display: grid;
+    grid-auto-columns: auto;
+    grid-auto-rows: min-content max-content min-content;
+    grid-template-areas:
+        "A B C . ."
+        "A D D D D"
+        "A E E E E";
+
     // .comment__image
 
     &__image {
+        margin-right: 30px;
+        grid-area: A;
         width: 59px;
         height: 59px;
-        margin-right: 30px;
         border-radius: 50%;
         -webkit-border-radius: 50%;
         -moz-border-radius: 50%;
@@ -277,17 +300,11 @@ button {
         -o-border-radius: 50%;
     }
 
-    // .comment__signature
-
-    &__signature {
-        display: flex;
-        gap: 15px;
-        margin-bottom: 10px;
-    }
-
     // .comment__signature-name
 
     &__signature-name {
+        margin-right: 15px;
+        grid-area: B;
         font-family: "Inter";
         font-style: normal;
         font-weight: 500;
@@ -299,6 +316,8 @@ button {
     // .comment__signature-date
 
     &__signature-date {
+        margin-top: 5px;
+        grid-area: C;
         font-family: "Inter";
         font-style: normal;
         font-weight: 400;
@@ -311,6 +330,10 @@ button {
     // .comment__text
 
     &__text {
+        margin-top: 10px;
+        grid-area: D;
+        width: 916px;
+        height: 132px;
         font-family: "Inter";
         font-style: normal;
         font-weight: 400;
@@ -322,6 +345,7 @@ button {
     // .comment__panel
 
     &__panel {
+        grid-area: E;
         margin-top: 15px;
         display: flex;
         align-items: center;
@@ -398,14 +422,21 @@ button {
         -o-border-radius: 50%;
     }
 }
+
 .answer {
-    margin-top: 40px;
-    margin-left: 101px;
-    max-width: 918px;
-    display: flex;
-    // .comment__image
+    margin: 30px 0 0 90px;
+    width: 916px;
+    display: grid;
+    grid-auto-columns: auto;
+    grid-auto-rows: min-content max-content min-content;
+    grid-template-areas:
+        "A B C D ."
+        "A E E E E"
+        "A F F F F";
+    // .answer__image
 
     &__image {
+        grid-area: A;
         width: 59px;
         height: 59px;
         margin-right: 30px;
@@ -416,17 +447,10 @@ button {
         -o-border-radius: 50%;
     }
 
-    // .comment__signature
+    // .answer__name
 
-    &__signature {
-        display: flex;
-        gap: 15px;
-        margin-bottom: 10px;
-    }
-
-    // .comment__signature-name
-
-    &__signature-name {
+    &__name {
+        grid-area: B;
         font-family: "Inter";
         font-style: normal;
         font-weight: 500;
@@ -435,9 +459,27 @@ button {
         color: #122ac0;
     }
 
-    // .comment__signature-date
+    //.answer__name-comment
 
-    &__signature-date {
+    &__name-comment {
+        grid-area: C;
+        margin: 0 15px 0 13px;
+        display: flex;
+        gap: 15px;
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 22px;
+        color: #000000;
+        opacity: 0.4;
+    }
+
+    // .answer__date
+
+    &__date {
+        grid-area: D;
+
         font-family: "Inter";
         font-style: normal;
         font-weight: 400;
@@ -447,9 +489,12 @@ button {
         opacity: 0.4;
     }
 
-    // .comment__text
+    // .answer__text
 
     &__text {
+        margin: 10px 0 0 0;
+        grid-area: E;
+
         font-family: "Inter";
         font-style: normal;
         font-weight: 400;
@@ -458,9 +503,11 @@ button {
         color: #000000;
     }
 
-    // .comment__panel
+    // .answer__panel
 
     &__panel {
+        grid-area: F;
+
         margin-top: 15px;
         display: flex;
         align-items: center;
