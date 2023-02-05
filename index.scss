@@ -18,23 +18,25 @@ button {
 }
 .body {
     margin: 0 auto;
-    height: 100vh;
+    height: auto;
 }
 .header {
     margin: 0 auto;
-    width: 1440px;
+    width: 100vw;
+    max-width: 1440px;
     height: 101px;
     background: #d9d9d9;
 }
 
 .nav {
     width: 203px;
-    height: 100vh;
+    height: auto;
     background: #d9d9d9;
 }
 .main {
     margin: 40px auto 0;
-    width: 1440px;
+    width: 100vw;
+    max-width: 1440px;
     display: flex;
     flex-wrap: wrap;
     gap: 86px;
@@ -63,7 +65,8 @@ button {
 
 .block-big {
     margin-top: 40px;
-    width: 1022px;
+    width: 100%;
+    max-width: 1022px;
     height: 168px;
     background: #d9d9d9;
 }
@@ -177,7 +180,7 @@ button {
 }
 .active-menu {
     display: flex;
-}
+} 
 
 .new-comments {
     margin-top: 32px;
@@ -333,7 +336,6 @@ button {
         margin-top: 10px;
         grid-area: D;
         width: 916px;
-        height: 132px;
         font-family: "Inter";
         font-style: normal;
         font-weight: 400;
@@ -567,4 +569,219 @@ button {
         -ms-border-radius: 50%;
         -o-border-radius: 50%;
     }
+}
+
+
+@media screen and (max-width: 768px) {  
+    .body {
+        width: 100vw;
+    }
+    .header {
+        height: 68px;
+    }
+    .main {
+        width: 100vw;
+    }
+    .nav {
+        display: none;
+    }
+    .block-one {
+        width: 100vw;
+    }
+    .container {
+
+        width: 100vw;
+    
+            // .container__box
+    
+            &__box {
+                margin: 0 auto 20px;
+                width: 94%;
+                height: 61px;
+                &:nth-child(n+3){
+                    display: none;
+                }
+                &:nth-child(odd) {
+                    margin: 0 auto 20px ;
+                }
+            }
+    }
+    .block-big {
+        margin: 0 auto;
+        width: 94%;
+        height: 132px;
+    }
+    .block-two {
+    }
+    .menu {
+    
+            // .menu__comment
+    
+            &__comment {
+            }
+    
+            // .menu__sorting
+    
+            &__sorting {
+            }
+    
+            // .menu__rating
+    
+            &__rating {
+            }
+    
+            // .menu__favorites
+    
+            &__favorites {
+            }
+    }
+    .rating-block {
+    }
+    .new-comments {
+    
+            // .new-comments__image
+    
+            &__image {
+            }
+    
+            // .new-comments__name
+    
+            &__name {
+            }
+    
+            // .new-comments__amount
+    
+            &__amount {
+            }
+    
+            // .new-comments__form
+    
+            &__form {
+            }
+    
+            // .new-comments__form-input
+    
+            &__form-input {
+            }
+    
+            // .new-comments__form-button
+    
+            &__form-button {
+            }
+    }
+    .comment {
+    
+            // .comment__image
+    
+            &__image {
+            }
+    
+            // .comment__signature-name
+    
+            &__signature-name {
+            }
+    
+            // .comment__signature-date
+    
+            &__signature-date {
+            }
+    
+            // .comment__text
+    
+            &__text {
+            }
+    
+            // .comment__panel
+    
+            &__panel {
+            }
+    
+            // .comment__panel-answer
+    
+            &__panel-answer {
+            }
+    
+            // .comment__panel-favorites
+    
+            &__panel-favorites {
+            }
+    
+            // .comment__favorite-button
+    
+            &__favorite-button {
+            }
+    
+            // .comment__favorite-button-minus
+    
+            &__favorite-button-minus {
+            }
+    
+            // .comment__favorite-button-number
+    
+            &__favorite-button-number {
+            }
+    
+            // .comment__favorite-button-plus
+    
+            &__favorite-button-plus {
+            }
+    }
+    .answer {
+    
+            // .answer__image
+    
+            &__image {
+            }
+    
+            // .answer__name
+    
+            &__name {
+            }
+    
+            // .answer__name-comment
+    
+            &__name-comment {
+            }
+    
+            // .answer__date
+    
+            &__date {
+            }
+    
+            // .answer__text
+    
+            &__text {
+            }
+    
+            // .answer__panel
+    
+            &__panel {
+            }
+    
+            // .answer__panel-favorites
+    
+            &__panel-favorites {
+            }
+    
+            // .answer__favorite-button
+    
+            &__favorite-button {
+            }
+    
+            // .answer__favorite-button-minus
+    
+            &__favorite-button-minus {
+            }
+    
+            // .answer__favorite-button-number
+    
+            &__favorite-button-number {
+            }
+    
+            // .answer__favorite-button-plus
+    
+            &__favorite-button-plus {
+            }
+    }
+    
 }
