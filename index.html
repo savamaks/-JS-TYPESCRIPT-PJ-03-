@@ -26,121 +26,43 @@
                         <div class="block-big"></div>
                     </div>
                 </section>
-                <section class="block-two">
-                    <div class="menu">
-                        <p class="menu__comment">Комментарии</p>
-                        <p class="menu__sorting">
-                            
-                            <img
-                                class="menu__rating__img"
-                                src="./image/Arrow 1.svg"
-                                alt=""
-                            />
-                            <div class="rating-block">
-                            </div>
-                        </p>
-                        
-                        <p class="menu__favorites">
-                            Избранное
-                            <img
-                                class="menu__favorites__img"
-                                src="./image/Group 1171274238.svg"
-                                alt=""
-                            />
-                        </p>
+                <div class="menu">
+                    <div class="menu__box-comment" >
+                        <p class="menu__box-comment-text">Комментарии</p>
+                        <p class="menu__box-comment-count"></p>
                     </div>
+                    <p class="menu__sorting"></p>
+                    <img class="menu__arrow-sorting" src="./image/arrow up.svg" alt="arrow up" />
+                    <div class="rating-block"></div>
+                    <p class="menu__favorites">
+                        Избранное
+                        <img class="menu__favorites-img" src="./image/сердце избранное.svg" alt="сердце избранное" />
+                    </p>
+                </div>
 
 
-                    <!-- <div class="new-comments">
-                        <img
-                            class="new-comments__image"
-                            src="./image/samsung-memory-hjRC0i0oJxg-unsplash 1.jpg"
-                            alt=""
-                        />
-                        <h2 class="new-comments__name">Максим Авдеенко</h2>
-                        <p class="new-comments__amount">Макс. 1000 символов</p>
-                        <form action="" class="new-comments__form" onsubmit="return false">
-                            <textarea class="new-comments__form-input" placeholder="Введите текст..."></textarea>
-                            <button     class="new-comments__form-button">Отправить</button>
-                        </form>
-                    </div>
-                    
-
-                    <div class="comment">
-                        <img class="comment__image" src="./image/albert-dera-ILip77SbmOE-unsplash.jpg"alt=""/>                            
-                        <h2 class="comment__signature-name">Алексей_1994b</h2>                            
-                        <p class="comment__signature-date">data</p>
-                        <p class="comment__text">Самое обидное когда сценарий по сути есть - в виде книг, где нет сюжетных дыр, всё логично, стройное повествование и достаточно взять и экранизировать оригинал как это было в первых фильмах с минимальным количеством отсебятины и зритель с восторгом примет любой такой фильм и сериал, однако вместо этого 'Кольца власти' просто позаимствовали имена из оригинала, куски истории, мало связанные между собой и выдали очередной среднячковый сериал на один раз в лучшем случае.</p>
-                        
-                        <div class="comment__panel">
-                            <button class="comment__panel-answer">
-                                <img src="./image/Mask group.svg" alt=""/>
-                                Ответить
-                            </button>
-                            <button class="comment__panel-favorites">
-                                <img src="./image/Mask group (1).svg" alt=""/>
-                                В избранное
-                            </button>
-                            <div class="comment__favorite-button">
-                                <button class="comment__favorite-button-minus">
-                                    <img src="./image/minus.svg" alt=""/>
-                                </button>
-                                <p class="comment__favorite-button-number">0</p>
-                                <button class="comment__favorite-button-plus">
-                                    <img src="./image/plus.svg" alt=""/>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="answer">
-                        <img
-                            class="answer__image"
-                            src="./image/mubariz-mehdizadeh-Py8F6-hRn5o-unsplash.jpg"
-                            alt=""
-                        />
-                        <h2 class="answer__name">Джунбокс3000</h2>
-                        <p class="answer__name-comment"><img src="./image/Mask group.svg" alt=""/>Алексей_1994b</p>
-                        <p class="answer__date">data</p>
-                        <p class="answer__text">Наверное, самая большая ошибка создателей сериала была в том, что они поставили уж слишком много надежд на поддержку фанатов вселенной. Как оказалось на деле, большинство 'фанатов' с самой настоящей яростью и желчью стали уничтожать сериал, при этом объективности в отзывах самый минимум.</p>
-                        <div class="answer__panel">
-                            
-                            <button class="answer__panel-favorites">
-                                <img
-                                    src="./image/Mask group (1).svg"
-                                    alt=""
-                                />
-                                В избранное
-                            </button>
-                            <div class="answer__favorite-button">
-                                <button
-                                    class="answer__favorite-button-minus"
-                                >
-                                    <img
-                                        src="./image/minus.svg"
-                                        alt=""
-                                    />
-                                </button>
-                                <p
-                                    class="answer__favorite-button-number"
-                                >
-                                    0
-                                </p>
-                                <button
-                                    class="answer__favorite-button-plus"
-                                >
-                                    <img
-                                        src="./image/plus.svg"
-                                        alt=""
-                                    />
-                                </button>
-                            </div>
-                        </div>
-                        
+                <div class="new-comments">
+                    <img class="new-comments__image" src="./image/samsung-memory-hjRC0i0oJxg-unsplash 1.jpg" alt="" />
+                    <h2 class="new-comments__name">Максим Авдеенко</h2>
+                    <!-- <div class="new-comments__answer" >
+                        <img class="new-comments__answer-image" src="./image/стрелка ответа.svg" alt="стрелка ответа">
+                        <h2 class="new-comments__answer-name">Алексей</h2>
                     </div> -->
-                </section>
+                    <p class="new-comments__amount">Макс. 1000 символов</p>
+                    <form action="" class="new-comments__form" onsubmit="return false">
+                        <textarea class="new-comments__form-input" placeholder="Введите текст..."></textarea>
+                        <button class="new-comments__form-button">Отправить</button>
+                    </form>
+                </div>
+                <section class="block-two"></section>
             </div>
         </main>
-
+        <script src="./comment.js"></script>
+        <script src="./users.js"></script>
+        <script src="./sortMenu.js"></script>
+        <script src="./favorites.js"></script>
+        <script src="./likes.js"></script>
+        <script src="./main.js"></script>
         <script src="./index.js"></script>
     </body>
 </html>
