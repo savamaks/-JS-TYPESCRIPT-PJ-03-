@@ -1,5 +1,10 @@
 class SortMenu {
-    constructor() {}
+    constructor({ blockTwo, arrowSorting,main }) {
+        this._blockTwo = blockTwo;
+        this._arrowSorting = arrowSorting;
+        this._main = main
+        this._arrowFlag = true;
+    }
 
     initSortMenu(arrList, menuSorting, raitingBlock) {
         menuSorting.textContent = arrList[0].text;
@@ -25,5 +30,21 @@ class SortMenu {
                 raitingBlock.classList.toggle("active-menu");
             });
         });
+
+        //стрелка переворот списка
+        this._arrowSorting.addEventListener("click", () => {
+            this._arrowSorting.classList.toggle("rotate-arrow-sorting");
+            if (this._arrowFlag) {
+                console.log('1');
+                this._arrowFlag = false;
+            } else {
+                this._arrowFlag = true;
+            }
+            this._main.localMemory(this._arrowFlag)
+            this.dateSort(this._arrowFlag)
+        });
+    }
+    dateSort(arrowFlag) {
+        
     }
 }

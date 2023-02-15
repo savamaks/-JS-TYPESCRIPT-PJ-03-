@@ -14,27 +14,35 @@ class Main {
         this._buttonsAnswer = document.querySelectorAll(".comment__panel-answer");
         this._buttonFavorites = document.querySelectorAll(".comment__panel-favorites");
         this._countCommentText = document.querySelector(".menu__box-comment-count");
-        this._time;
+        this._date;
         this._parent;
         this._parentName;
 
         this._answerFlag = false;
         this._checkButtonFlag = false;
-        this._favoritesFlag = true;
+        this._favoritesFlag = "deactive";
+        this._reverseFlag = false
 
-        this._countComment = 0
+        this._countComment = 0;
 
         this._arrList = [{ text: "По дате" }, { text: "По количеству оценок" }, { text: "По актуальности" }, { text: "По количеству ответов" }];
+        this._localMemory = new LocalMemory({});
 
-        this._sortMenu = new SortMenu();
+        this._sortMenu = new SortMenu({
+            blockTwo: this._blockTwo,
+            arrowSorting: this._arrowSorting,
+            main:this
+        });
 
         this._likes = new Likes({
             blockTwo: this._blockTwo,
+            localMemory: this._localMemory,
         });
 
         this._favorites = new Favorites({
             buttonFavorites: this._buttonFavorites,
-            blockFavorites: this._blockFavorites,
+            menuFavoritesButton: this._menuFavoritesButton,
+            localMemory: this._localMemory,
         });
 
         this._comment = new Comment({
@@ -43,8 +51,9 @@ class Main {
             blockTwo: this._blockTwo,
             favorites: this._favorites,
             likes: this._likes,
-            countComment:this._countComment,
+            countComment: this._countComment,
             countCommentText: this._countCommentText,
+            localMemory: this._localMemory,
             main: this,
         });
     }
@@ -56,12 +65,16 @@ class Main {
         this._date = this._dateNow.getDate();
         this._hour = this._dateNow.getHours();
         this._minutes = this._dateNow.getMinutes() > 9 ? this._dateNow.getMinutes() : "0" + this._dateNow.getMinutes();
-
-        return (this._time = `${this._date}.${this._month} ${this._hour}:${this._minutes}`);
+        this._seconds = this._dateNow.getSeconds() > 9 ? this._dateNow.getSeconds() : "0" + this._dateNow.getSeconds();
+        return {
+            time: `${this._date}.${this._month} ${this._hour}:${this._minutes}`,
+            key: this._month + this._date + this._hour + this._minutes + this._seconds,
+        };
     }
 
     initButton() {
-        this._countCommentText.textContent = `(${this._countComment})`
+        // количество комментариев
+        this._countCommentText.textContent = `(${this._countComment})`;
 
         // this.r = localStorage.getItem(1)
         this._sortMenu.initSortMenu(this._arrList, this._menuSorting, this._raitingBlock);
@@ -69,40 +82,10 @@ class Main {
         this._menuSorting.addEventListener("click", () => {
             this._raitingBlock.classList.toggle("active-menu");
         });
-        this._arrowSorting.addEventListener("click", () => {
-            this._arrowSorting.classList.toggle("rotate-arrow-sorting");
-        });
 
+        // кнопка избраное
 
-
-
-        this._menuFavoritesButton.addEventListener("click", () => {
-
-            // this._menuFavoritesButton.classList.toggle("active-favorite")
-            if (!this._menuFavoritesButton.classList.contains("flag-favorite")) {
-                this._menuFavoritesButton.classList.toggle("flag-favorite");
-                this._favoritesFlag = false;
-            } else {
-                this._menuFavoritesButton.classList.toggle("flag-favorite");
-                this._favoritesFlag = true;
-            }
-
-            this._favoritesComent = document.querySelectorAll(".comment");
-
-            this._favoritesComent.forEach((element) => {
-                if (!element.classList.contains("flag-favorite")) {
-                    element.classList.toggle("not-favorite");
-                }
-            });
-            this._favoritesAnswer = document.querySelectorAll(".answer");
-
-            this._favoritesAnswer.forEach((element) => {
-                if (!element.classList.contains("flag-favorite")) {
-                    element.classList.toggle("not-favorite");
-                }
-            });
-        });
-        // this._likes.likes()
+        this._favorites.initButton();
 
         this._textInput.addEventListener("keyup", () => {
             this.checkTextInput();
@@ -112,17 +95,76 @@ class Main {
             this.createComment();
         });
 
-        this._favorites.button();
-
-        // this._buttonsAnswer.forEach((element) => {
-        //     this._comment.handlerButtonAnswer(element);
-        // });
-
-        // this._buttonFavorites.forEach((element) => {
-        //     this._favorites.handlerButtonFavorites(element, this._favoritesFlag);
-        // });
+        this.localMemory()
     }
+    localMemory(arrowFlag) {
 
+        // console.log(document.querySelector('.comment') !== null)
+        if(document.querySelector('.comment') !== null){
+            console.log('rem')
+            
+            document.querySelectorAll('.comment').forEach((element)=>{
+                element.remove()
+            })
+        }
+        // console.log(localStorage.length);
+        let arr = [];
+        if (localStorage.length > 0) {
+            for (let index = 0; index < localStorage.length; index++) {
+                const element = localStorage.key(index);
+                let commentJson = localStorage.getItem(element);
+
+                arr[index] = element;
+            }
+            // console.log(arr);
+            arr.sort(function (a, b) {
+                return a - b;
+            });
+            
+            // console.log(arrowFlag);
+            // if(!arrowFlag){
+                // arr.reverse()
+            // }
+            
+
+
+            for (let index = 0; index < arr.length; index++) {
+                // console.log(arr[index]);
+                let commentJson = localStorage.getItem(arr[index]);
+                let commentParse = JSON.parse(commentJson);
+
+                // arr[index] = +element
+                // console.log(commentParse.parentName === undefined );
+
+                if (commentParse.parentName === undefined) {
+                this._comment.writeNewComment({
+                    name: commentParse.name,
+                    time: commentParse.time,
+                    text: commentParse.text,
+                    likes: +commentParse.likes,
+                    favorites: commentParse.favorites,
+                    numberComment: +commentParse.numberComment,
+                    key: commentParse.key,
+                });
+                console.log();
+
+                }
+                else {
+                this._comment.writeAnswer({
+                    name: commentParse.name,
+                    parentName:commentParse.parentName,
+                    time: commentParse.time,
+                    text: commentParse.text,
+                    likes: commentParse.likes,
+                    favorites: commentParse.favorites,
+                    numberComment:+commentParse.numberComment,
+                    key: commentParse.key,
+
+                });
+                }
+            }
+        }
+    }
     buttonAnswer() {
         this.createComment();
         this._answerFlag = true;
@@ -148,21 +190,22 @@ class Main {
     createComment() {
         // this._likes.likes()
         if (this._checkButtonFlag) {
-            this._time = this.nowTime();
-
+            this._date = this.nowTime();
+            // console.log(this._date);
             if (!this._answerFlag) {
                 this._comment.writeNewComment({
-                    time: this._time,
+                    time: this._date.time,
                     text: this._textInput.value,
-                    favoritesFlag: this._favoritesFlag,
+                    key: this._date.key,
                 });
             } else {
+                // console.log(this._parent,this._parentName);
                 this._comment.writeAnswer({
-                    time: this._time,
+                    time: this._date.time,
                     text: this._textInput.value,
                     parent: this._parent,
                     parentName: this._parentName,
-                    favoritesFlag: this._favoritesFlag,
+                    key: this._date.key,
                 });
                 this._answerFlag = false;
             }
@@ -172,6 +215,7 @@ class Main {
             this._amount.textContent = "";
             this._checkButtonFlag = false;
             this._textInput.style.removeProperty("height");
+            this._amount.textContent = "Макс. 1000 символов";
         }
     }
 }
