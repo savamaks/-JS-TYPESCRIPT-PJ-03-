@@ -6,7 +6,7 @@ class Favorites {
         this._favorites;
     }
 
-    handlerButtonFavorites({ panelButtonFavorites, name, parentName, time, text,key }) {
+    handlerButtonFavorites({ panelButtonFavorites, name,imageAccount, parentName, time, text,key }) {
         //если открыты избранные сообщения,
         // то новое сообщение не видно в списке пока не закрыть избраное
         if (this._menuFavoritesButton.classList.contains("flag-favorite")) {
@@ -21,9 +21,12 @@ class Favorites {
             this._imageComment.src = "./image/flag-favorite.svg";
             this._comment.setAttribute("favorites", "flag-favorite");
             this._favorites = "flag-favorite";
-            // this._comment.removeAttribute("attribute", "empty heart");
+            // console.log(this._imageComment)
+            // panelButtonFavorites.remove()
+            // panelButtonFavorites.append(this._imageComment + 'В избраном')  
+            // console.log(panelButtonFavorites)
 
-            console.log("button favor");
+            // console.log("button favor");
 
             if (!this._comment.classList.contains("flag-favorite")) {
                 if (this._menuFavoritesButton.classList.contains("flag-favorite")) {
@@ -33,11 +36,12 @@ class Favorites {
 
                 this._comment.setAttribute("favorites", "not-favorite");
                 this._favorites = "not-favorite";
-                console.log("del favor");
+                // console.log("del favor");
             }
-        console.log(this._comment.parentElement.firstChild);
+        // console.log(this._comment.parentElement.firstChild);
             this._localMemory.writeCommentMemory({
                 name: name,
+                imageAccount:imageAccount,
                 parentName: parentName,
                 time: time,
                 text: text,

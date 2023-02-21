@@ -1,5 +1,5 @@
 class Comment {
-    constructor({ user, textInput, blockTwo, favorites, likes, countComment, countCommentText, localMemory, main }) {
+    constructor({ user, textInput, blockTwo, favorites, likes,  localMemory, main }) {
         this._user = user;
         this._textInput = textInput;
         this._blockTwo = blockTwo;
@@ -7,24 +7,12 @@ class Comment {
         this._likes = likes;
         this._main = main;
         this._numberComment=0
-        this._countComment = countComment;
-        this._countCommentText = countCommentText;
         this._localMemory = localMemory;
     }
-    handlerButtonAnswer(answer) {
-        answer.addEventListener("click", () => {
-            this._main._parent = answer.parentElement.parentElement.parentElement;
-            this._main._parentName = this._main._parent.querySelector(".comment__name").textContent;
-            this._main._answerFlag = true;
-        });
-    }
+    
 
-    writeNewComment({ name, time, text, likes, favorites,key }) {
-        
-        this._numberComment++
-        this._countComment++;
-        // console.log( this._numberComment);
-        this._countCommentText.textContent = `(${this._countComment})`;
+    writeNewComment({ name, imageAccount, time, text, likes, favorites,key,reverse,amountChild }) {
+        // console.log(numberComment);
         // console.log(favorites)
         this.mainDiv = document.createElement("div");
         this.mainDiv.classList.add("main-div");
@@ -36,10 +24,14 @@ class Comment {
         }
         this.commentDiv.setAttribute('likes',likes === undefined ? 0 : likes)
         this.commentDiv.setAttribute("favorites", `${favorites === undefined? 'not-favorite': favorites}`);
-        this.commentDiv.setAttribute('number-comment',`${this._numberComment}`)
+
+        
+        // console.log(num)
+        this.commentDiv.setAttribute('number-comment',`${key}`)
         this.imageAccount = document.createElement("img");
         this.imageAccount.classList.add("comment__image");
-        this.imageAccount.src = "./image/samsung-memory-hjRC0i0oJxg-unsplash 1.jpg";
+
+        this.imageAccount.src = `${imageAccount? imageAccount:'./image/Максим Алексеев.jpg'}`;
         this.imageAccount.alt = "foto account";
 
         this.signatureName = document.createElement("h2");
@@ -112,7 +104,15 @@ class Comment {
 
         this.mainDiv.append(this.commentDiv);
 
-        this._blockTwo.append(this.mainDiv);
+        if(reverse){
+            this._blockTwo.prepend(this.mainDiv);
+        }else if(reverse === undefined ||reverse === false){
+            this._blockTwo.append(this.mainDiv);
+
+        }
+        // console.log(this.mainDiv.childNodes.length-1);
+        // this.mainDiv.setAttribute('count-child', this.mainDiv.childNodes.lenght)
+
 
         //повесить обработчик событий который указывает к какому коментарию ответ
         this.handlerButtonAnswer(this.panelButtonAnswer);
@@ -121,6 +121,7 @@ class Comment {
         this._favorites.handlerButtonFavorites({
             panelButtonFavorites: this.panelButtonFavorites,
             name: this.signatureName.textContent,
+            imageAccount:imageAccount,
             time: time,
             text: text,
             key:key,
@@ -130,20 +131,26 @@ class Comment {
         this._likes.likesComment({
             buttonMinus: this.buttonMinus,
             panelLikesDivText: this.panelLikesDivText,
+            imageAccount:imageAccount,
             likes: likes,
             buttonPlus: this.buttonPlus,
             key:key
         });
 
+
+
+// console.log(amountChild);
         //запись в localStorage
         this._localMemory.writeCommentMemory({
             name: this.signatureName.textContent,
+            imageAccount:imageAccount,
             time: time,
             text: text,
             likes: this.panelLikesDivText.textContent,
             favorites: this.commentDiv.getAttribute("favorites"),
-            numberComment:this._numberComment,
-            key:key
+            numberComment:key,
+            key:key,
+            amountChild:amountChild=== undefined? 0:amountChild,
 
         });
         // let r = document.querySelector(`[number-comment="${this._numberComment}"]`)
@@ -152,18 +159,29 @@ class Comment {
 
 
 
+    handlerButtonAnswer(answer) {
+        answer.addEventListener("click", () => {
+            this._main._parent = answer.parentElement.parentElement.parentElement;
+            this._main._parentName = this._main._parent.querySelector(".comment__name").textContent;
+            this._main._answerFlag = true;
+            console.log(this._main._parent,
+                this._main._parentName,
+                this._main._answerFlag)
+            
+        });
+    }
 
 
 
 
-
-    writeAnswer({ name,parentName, time, text, parent, likes,favorites, numberComment,key }) {
+    writeAnswer({ name,imageAccount, parentName, time, text, parent, likes,favorites, numberComment,key,reverse }) {
         
         this._parent = document.querySelector(`[number-comment="${numberComment}"]`)?.parentElement
         
+        // console.log(numberComment)
+        // console.log(parent)
 
-        this._countComment++;
-        this._countCommentText.textContent = `(${this._countComment})`;
+
 
         this.commentDiv = document.createElement("div");
         this.commentDiv.classList.add("answer");
@@ -175,7 +193,10 @@ class Comment {
 
         this.imageAccount = document.createElement("img");
         this.imageAccount.classList.add("answer__image");
-        this.imageAccount.src = "./image/samsung-memory-hjRC0i0oJxg-unsplash 1.jpg";
+
+        // console.log(imageAccount? 'yes':'no');
+
+        this.imageAccount.src = `${imageAccount? imageAccount :'./image/Максим Алексеев.jpg'}`;
         this.imageAccount.alt = "foto account";
 
         this.signatureName = document.createElement("h2");
@@ -260,14 +281,19 @@ class Comment {
         this.panelFavoritesDiv.append(this.buttonMinus, this.panelLikesDivText, this.buttonPlus);
 
         // console.log(parent.getAttribute('numberComment'));
-        this._parent?.append(this.commentDiv);
+       
+       
+        this._parent?.append(this.commentDiv)
         parent?.append(this.commentDiv);
 
+        //количество ответов к коментарию
+        
         
         //вешает обработчик на кнопку избранное
         this._favorites.handlerButtonFavorites({
             panelButtonFavorites: this.panelButtonFavorites,
             name: this.signatureName.textContent,
+            imageAccount:imageAccount,
             parentName: parentName,
             time: time,
             text: text, 
@@ -278,6 +304,7 @@ class Comment {
         this._likes.likesComment({
             buttonMinus: this.buttonMinus,
             panelLikesDivText: this.panelLikesDivText,
+            imageAccount:imageAccount,
             parentName: parentName,
             likes: likes,
             buttonPlus: this.buttonPlus,
@@ -285,25 +312,58 @@ class Comment {
 
         });
 // console.log(parent.firstElementChild.getAttribute("number-comment"));
-        let number
+        this._number
+
         if(parent !== undefined){
-            number = parent.firstElementChild.getAttribute("number-comment")
+            // console.log(parent);
+            this._number = parent.firstElementChild.getAttribute("number-comment")
+
+            this._amountChildParent = parent.firstElementChild.getAttribute('amount-child')
+
+            parent.firstElementChild.setAttribute('amount-child',+this._amountChildParent+1)
+            this._amountChildParentNew = parent.firstElementChild.getAttribute('amount-child')
+
 
         } else{
             // console.log(this._parent);
-            number = this._parent.firstElementChild.getAttribute("number-comment")
+            this._number = this._parent.firstElementChild.getAttribute("number-comment")
+
+            this._amountChildParent = this._parent.firstElementChild.getAttribute('amount-child')
+            this._parent.firstElementChild.setAttribute('amount-child', +this._amountChildParent+1)
+           
+            this._amountChildParentNew = this._parent.firstElementChild.getAttribute('amount-child')
         }
+
+        this._parentUpdate = JSON.parse(localStorage.getItem(this._number)) 
+        // console.log(this._parentUpdate);
+        // console.log(this._parentUpdate.key);
+
+        // console.log(this._amountChildParentNew);
+
+        this._localMemory.writeCommentMemory({
+            name:this._parentUpdate.name,
+            imageAccount:this._parentUpdate.imageAccount,
+            time: this._parentUpdate.time,
+            text: this._parentUpdate.text,
+            likes:this._parentUpdate.likes,
+            favorites:this._parentUpdate.favorites,
+            numberComment:this._parentUpdate.numberComment,
+            key:this._parentUpdate.key,
+            amountChild:this._amountChildParentNew,
+        })
+
         
         //запись в localStorage
         this._localMemory.writeCommentMemory({
             name: this.signatureName.textContent,
+            imageAccount:imageAccount,
             parentName: parentName,
             time: time,
             text: text,
             likes: this.panelLikesDivText.textContent,
             favorites: this.commentDiv.getAttribute("favorites"),
-            numberComment:number,
-            key:key
+            numberComment:this._number?this._number:numberComment,
+            key:key,
         });
     }
 }

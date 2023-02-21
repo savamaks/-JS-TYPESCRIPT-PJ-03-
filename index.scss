@@ -2,13 +2,13 @@
 * {
     margin: 0;
     padding: 0;
-    
 }
 *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
+
 button {
     padding: 0;
     border: none;
@@ -41,16 +41,18 @@ button {
     max-width: 1440px;
     min-height: 100vh;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    justify-content: center;
     gap: 86px;
 }
 .block-one {
+    margin: 0 auto;
 }
 
 .container {
     max-width: 1022px;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 
     &__box {
         width: 487px;
@@ -67,6 +69,8 @@ button {
 }
 
 .block-big {
+    grid-column-start: 1;
+    grid-column-end: 3;
     margin-top: 40px;
     width: 100%;
     max-width: 1022px;
@@ -80,10 +84,11 @@ button {
     display: grid;
     grid-template-columns: min-content max-content min-content min-content;
     align-items: center;
-    
+
     // .menu__comments
 
     &__box-comment {
+        max-width: 190px;
         display: flex;
         margin-top: 20px;
         font-family: "Inter";
@@ -97,13 +102,14 @@ button {
 
     //.menu__box-comment-count
 
-    &__box-comment-count{
+    &__box-comment-count {
         opacity: 0.4;
-    }   
+    }
 
     // .menu__sorting
 
     &__sorting {
+        min-width: 62px ;
         margin: 0 0 0 50px;
         opacity: 1;
         margin-top: 20px;
@@ -125,8 +131,7 @@ button {
         width: 13px;
         height: 13px;
         cursor: pointer;
-}
-    
+    }
 
     // .menu__favorites
 
@@ -145,7 +150,7 @@ button {
         opacity: 0.4;
         cursor: pointer;
     }
-    
+
     // .menu__favorites-img
 
     &__favorites-img {
@@ -154,16 +159,15 @@ button {
         // opacity: 0.5;
     }
 }
-.active-favorite{
+.active-favorite {
     opacity: 1;
-
 }
-.rotate-arrow-sorting{
+.rotate-arrow-sorting {
     transform: rotate(180deg);
-        -webkit-transform: rotate(180deg);
-        -moz-transform: rotate(180deg);
-        -ms-transform: rotate(180deg);
-        -o-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
 }
 .rating-block {
     z-index: 999;
@@ -217,19 +221,16 @@ button {
 .active-menu {
     display: flex;
 }
-.inactive{
+.inactive {
     display: none;
 }
-
-
-
 
 .new-comments {
     margin-top: 32px;
     display: grid;
     grid-auto-columns: auto;
     grid-template-areas:
-        "A B C . ."
+        "A B . C E"
         "A D D D D";
     // .new-comments__image
 
@@ -258,12 +259,11 @@ button {
         color: #122ac0;
     }
 
-    
     // .new-comments__amount
 
     &__amount {
+        margin: 0 40px 0 0;
         grid-area: C;
-        margin-left: 378px;
         font-family: "Inter";
         font-style: italic;
         font-weight: 400;
@@ -273,6 +273,29 @@ button {
         opacity: 0.4;
     }
 
+    //new-comments__amount-box
+
+    &__amount-box {
+        grid-area: E;
+        width: 208px;
+        height: 17px;
+    }
+
+    //new-comments__amount-error
+
+    &__amount-error {
+        font-family: "Inter";
+        font-style: italic;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #ff0000;
+        display: none;
+        opacity: 0.4;
+    }
+    .active-error {
+        display: block;
+    }
     // .new-comments__form
 
     &__form {
@@ -331,7 +354,6 @@ button {
         "A D D D D"
         "A E E E E";
 
-
     // .comment__image
 
     &__image {
@@ -358,10 +380,10 @@ button {
         line-height: 22px;
         color: #122ac0;
     }
-    
+
     //.comment__name-comment
-    
-    &__name-comment{
+
+    &__name-comment {
         display: none;
     }
     // .comment__date
@@ -528,7 +550,6 @@ button {
         opacity: 0.4;
     }
 
-
     // .answer__date
 
     &__date {
@@ -622,10 +643,10 @@ button {
         -o-border-radius: 50%;
     }
 }
-.flag-favorite{
+.flag-favorite {
     opacity: 1;
 }
-.not-favorite{
+.not-favorite {
     display: none;
 }
 
@@ -634,6 +655,7 @@ button {
         width: 100vw;
     }
     .header {
+        width: 100vw;
         height: 68px;
     }
     .main {
@@ -647,14 +669,14 @@ button {
     }
     .container {
         width: 100vw;
-
+        grid-template-columns: 1fr;
         // .container__box
 
         &__box {
             margin: 0 auto 20px;
             width: 94%;
             height: 61px;
-            &:nth-child(n + 3) {
+            &:nth-child(n + 4) {
                 display: none;
             }
             &:nth-child(odd) {
@@ -670,6 +692,8 @@ button {
     .block-two {
     }
     .menu {
+        display: flex;
+        flex-flow: row wrap;
         margin: 31px 10px 0 10px;
 
         // .menu__comment
@@ -680,6 +704,7 @@ button {
         // .menu__sorting
 
         &__sorting {
+
         }
 
         // .menu__rating
@@ -701,7 +726,6 @@ button {
         &__item {
             font-size: 14px;
             line-height: 17px;
-
         }
     }
     .new-comments {
@@ -709,7 +733,8 @@ button {
         grid-template-areas:
             "A B B ."
             "A . C C"
-            "D D D D";
+            "D D D D"
+            "E E E E";
 
         // .new-comments__image
 
@@ -734,6 +759,22 @@ button {
             justify-self: end;
             font-size: 10px;
             line-height: 12px;
+        }
+        //new-comments__amount-box
+
+        &__amount-box {
+            justify-self: center;
+            grid-area: E;
+            width: 179px;
+            height: 15px;
+        }
+
+        //new-comments__amount-error
+
+        &__amount-error {
+            margin-top: 10px;
+            font-size: 12px;
+            line-height: 15px;
         }
 
         // .new-comments__form
@@ -800,7 +841,7 @@ button {
         // .comment__text
 
         &__text {
-            width: 100%;
+            width: 98%;
             margin: 15px auto 19px;
             font-size: 16px;
             line-height: 19px;
@@ -829,7 +870,7 @@ button {
 
         // .comment__favorite-button
 
-        &__favorite-button {
+        &__likes-button {
             gap: 0;
             align-items: center;
             justify-content: center;
@@ -838,18 +879,18 @@ button {
 
         // .comment__favorite-button-minus
 
-        &__favorite-button-minus {
+        &__likes-button-minus {
         }
 
         // .comment__favorite-button-number
 
-        &__favorite-button-number {
+        &__likes-button-number {
             margin: 5px auto 0;
         }
 
         // .comment__favorite-button-plus
 
-        &__favorite-button-plus {
+        &__likes-button-plus {
         }
     }
     .answer {
@@ -899,7 +940,7 @@ button {
         // .answer__text
 
         &__text {
-            width: 100%;
+            width: 98%;
             margin: 0 auto;
             font-size: 16px;
             line-height: 19px;
@@ -921,7 +962,7 @@ button {
 
         // .comment__favorite-button
 
-        &__favorite-button {
+        &__likes-button {
             gap: 0;
             align-items: center;
             justify-content: center;
@@ -930,18 +971,18 @@ button {
 
         // .comment__favorite-button-minus
 
-        &__favorite-button-minus {
+        &__likes-button-minus {
         }
 
         // .comment__favorite-button-number
 
-        &__favorite-button-number {
+        &__likes-button-number {
             margin: 5px auto 0;
         }
 
         // .comment__favorite-button-plus
 
-        &__favorite-button-plus {
+        &__likes-button-plus {
         }
     }
 }

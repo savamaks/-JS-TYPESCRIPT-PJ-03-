@@ -48,18 +48,24 @@ button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   gap: 86px;
+}
+
+.block-one {
+  margin: 0 auto;
 }
 
 .container {
   max-width: 1022px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
 }
 .container__box {
   width: 487px;
@@ -75,6 +81,10 @@ button {
 }
 
 .block-big {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  -ms-grid-column-span: 2;
+  grid-column-end: 3;
   margin-top: 40px;
   width: 100%;
   max-width: 1022px;
@@ -97,6 +107,7 @@ button {
           align-items: center;
 }
 .menu__box-comment {
+  max-width: 190px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -113,6 +124,7 @@ button {
   opacity: 0.4;
 }
 .menu__sorting {
+  min-width: 62px;
   margin: 0 0 0 50px;
   opacity: 1;
   margin-top: 20px;
@@ -231,7 +243,7 @@ button {
   display: -ms-grid;
   display: grid;
   grid-auto-columns: auto;
-      grid-template-areas: "A B C . ." "A D D D D";
+      grid-template-areas: "A B . C E" "A D D D D";
 }
 .new-comments__image {
   -ms-grid-row: 1;
@@ -279,9 +291,9 @@ button {
 }
 .new-comments__amount {
   -ms-grid-row: 1;
-  -ms-grid-column: 3;
+  -ms-grid-column: 4;
+  margin: 0 40px 0 0;
   grid-area: C;
-  margin-left: 378px;
   font-family: "Inter";
   font-style: italic;
   font-weight: 400;
@@ -297,6 +309,36 @@ button {
 .answer > .new-comments__amount {
   -ms-grid-row: 1;
   -ms-grid-column: 3;
+}
+.new-comments__amount-box {
+  -ms-grid-row: 1;
+  -ms-grid-column: 5;
+  grid-area: E;
+  width: 208px;
+  height: 17px;
+}
+.comment > .new-comments__amount-box {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 4;
+}
+.answer > .new-comments__amount-box {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 4;
+}
+.new-comments__amount-error {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ff0000;
+  display: none;
+  opacity: 0.4;
+}
+.new-comments .active-error {
+  display: block;
 }
 .new-comments__form {
   -ms-grid-row: 2;
@@ -427,7 +469,7 @@ button {
 }
 .comment__date {
   -ms-grid-row: 1;
-  -ms-grid-column: 3;
+  -ms-grid-column: 4;
   margin-top: 5px;
   grid-area: C;
   font-family: "Inter";
@@ -471,9 +513,8 @@ button {
   -ms-grid-column-span: 1;
 }
 .comment__panel {
-  -ms-grid-row: 3;
-  -ms-grid-column: 2;
-  -ms-grid-column-span: 4;
+  -ms-grid-row: 1;
+  -ms-grid-column: 5;
   grid-area: E;
   margin-top: 15px;
   display: -webkit-box;
@@ -482,6 +523,11 @@ button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+.comment > .comment__panel {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 4;
 }
 .answer > .comment__panel {
   -ms-grid-row: 2;
@@ -612,7 +658,7 @@ button {
 }
 .answer__name-comment {
   -ms-grid-row: 1;
-  -ms-grid-column: 3;
+  -ms-grid-column: 4;
   grid-area: C;
   margin: 0 15px 0 13px;
   display: -webkit-box;
@@ -659,9 +705,8 @@ button {
   -ms-grid-column-span: 1;
 }
 .answer__text {
-  -ms-grid-row: 3;
-  -ms-grid-column: 2;
-  -ms-grid-column-span: 4;
+  -ms-grid-row: 1;
+  -ms-grid-column: 5;
   margin: 10px 0 0 0;
   grid-area: E;
   font-family: "Inter";
@@ -670,6 +715,11 @@ button {
   font-size: 18px;
   line-height: 22px;
   color: #000000;
+}
+.comment > .answer__text {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 4;
 }
 .answer > .answer__text {
   -ms-grid-row: 2;
@@ -751,6 +801,7 @@ button {
     width: 100vw;
   }
   .header {
+    width: 100vw;
     height: 68px;
   }
   .main {
@@ -764,13 +815,15 @@ button {
   }
   .container {
     width: 100vw;
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
   }
   .container__box {
     margin: 0 auto 20px;
     width: 94%;
     height: 61px;
   }
-  .container__box:nth-child(n+3) {
+  .container__box:nth-child(n+4) {
     display: none;
   }
   .container__box:nth-child(odd) {
@@ -782,6 +835,13 @@ button {
     height: 132px;
   }
   .menu {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
     margin: 31px 10px 0 10px;
   }
   .rating-block {
@@ -797,7 +857,7 @@ button {
     -ms-grid-columns: 60px min-content min-content min-content;
     grid-template-columns: 60px -webkit-min-content -webkit-min-content -webkit-min-content;
     grid-template-columns: 60px min-content min-content min-content;
-        grid-template-areas: "A B B ." "A . C C" "D D D D";
+        grid-template-areas: "A B B ." "A . C C" "D D D D" "E E E E";
   }
   .new-comments__image {
     width: 50px;
@@ -816,6 +876,47 @@ button {
         justify-self: end;
     font-size: 10px;
     line-height: 12px;
+  }
+  .new-comments__amount-box {
+    -ms-grid-row: 1;
+    -ms-grid-column: 5;
+    -ms-grid-column-align: center;
+        justify-self: center;
+    grid-area: E;
+    width: 179px;
+    height: 15px;
+  }
+  .comment > .new-comments__amount-box {
+    -ms-grid-row: 3;
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 4;
+  }
+  .answer > .new-comments__amount-box {
+    -ms-grid-row: 2;
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 4;
+  }
+  @media screen and (max-width: 768px){
+  .new-comments__amount-box {
+      -ms-grid-row: 4;
+      -ms-grid-column: 1;
+      -ms-grid-column-span: 4;
+  }
+  .comment > .new-comments__amount-box {
+      -ms-grid-row: 3;
+      -ms-grid-column: 1;
+      -ms-grid-column-span: 3;
+  }
+  .answer > .new-comments__amount-box {
+      -ms-grid-row: 3;
+      -ms-grid-column: 1;
+      -ms-grid-column-span: 3;
+  }
+  }
+  .new-comments__amount-error {
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 15px;
   }
   .new-comments__form {
     -ms-flex-wrap: wrap;
@@ -865,7 +966,7 @@ button {
     line-height: 15px;
   }
   .comment__text {
-    width: 100%;
+    width: 98%;
     margin: 15px auto 19px;
     font-size: 16px;
     line-height: 19px;
@@ -882,7 +983,7 @@ button {
     font-size: 16px;
     line-height: 19px;
   }
-  .comment__favorite-button {
+  .comment__likes-button {
     gap: 0;
     -webkit-box-align: center;
         -ms-flex-align: center;
@@ -895,7 +996,7 @@ button {
         -ms-flex-direction: column;
             flex-direction: column;
   }
-  .comment__favorite-button-number {
+  .comment__likes-button-number {
     margin: 5px auto 0;
   }
   .answer {
@@ -936,7 +1037,7 @@ button {
     line-height: 15px;
   }
   .answer__text {
-    width: 100%;
+    width: 98%;
     margin: 0 auto;
     font-size: 16px;
     line-height: 19px;
@@ -949,7 +1050,7 @@ button {
     font-size: 16px;
     line-height: 19px;
   }
-  .answer__favorite-button {
+  .answer__likes-button {
     gap: 0;
     -webkit-box-align: center;
         -ms-flex-align: center;
@@ -962,7 +1063,7 @@ button {
         -ms-flex-direction: column;
             flex-direction: column;
   }
-  .answer__favorite-button-number {
+  .answer__likes-button-number {
     margin: 5px auto 0;
   }
   .new-comments__image {
@@ -1007,6 +1108,21 @@ button {
   }
   .answer > .new-comments__amount {
     -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 3;
+  }
+  .new-comments__amount-box {
+    -ms-grid-row: 4;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 4;
+  }
+  .comment > .new-comments__amount-box {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 3;
+  }
+  .answer > .new-comments__amount-box {
+    -ms-grid-row: 3;
     -ms-grid-column: 1;
     -ms-grid-column-span: 3;
   }
@@ -1086,6 +1202,11 @@ button {
     -ms-grid-column-span: 1;
   }
   .comment__panel {
+    -ms-grid-row: 4;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 4;
+  }
+  .comment > .comment__panel {
     -ms-grid-row: 3;
     -ms-grid-column: 1;
     -ms-grid-column-span: 3;
@@ -1156,6 +1277,11 @@ button {
     -ms-grid-column-span: 1;
   }
   .answer__text {
+    -ms-grid-row: 4;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 4;
+  }
+  .comment > .answer__text {
     -ms-grid-row: 3;
     -ms-grid-column: 1;
     -ms-grid-column-span: 3;

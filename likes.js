@@ -6,7 +6,7 @@ class Likes {
         this._result;
     }
 
-    likesComment({ buttonMinus, panelLikesDivText, likes, buttonPlus,key}) {
+    likesComment({ buttonMinus, panelLikesDivText, imageAccount, likes, buttonPlus,key}) {
         let count = likes === undefined ? 0 : likes;
 
         buttonMinus.addEventListener("click", () => {
@@ -26,7 +26,7 @@ class Likes {
                 this._localCount = this._result * -1;
             }
             // при изменинии лайков, коммент перезаписывается в память
-            this.writeLocalMemory(buttonMinus, this._localCount,key);
+            this.writeLocalMemory(buttonMinus, this._localCount,key,imageAccount);
         });
 
         buttonPlus.addEventListener("click", () => {
@@ -47,10 +47,11 @@ class Likes {
                 this._localCount = this._result * -1;
             }
             // при изменинии лайков, коммент перезаписывается в память
-            this.writeLocalMemory(buttonPlus, this._localCount,key);
+            this.writeLocalMemory(buttonPlus, this._localCount,key,imageAccount);
         });
     }
     writeLocalMemory(child, localCount,key) {
+        console.log('ok')
         this._comment = child.parentElement.parentElement.parentElement;
         // console.log(this._comment.getAttribute("attribute"));
 
@@ -65,6 +66,7 @@ class Likes {
 
         this._localMemory.writeCommentMemory({
             name: this._commentName.textContent,
+            imageAccount:imageAccount,
             parentName: this._commentNameAnswer.textContent,
             time: this._commentDate.textContent,
             text: this._commentText.textContent,
@@ -74,46 +76,4 @@ class Likes {
             key:key,
         });
     }
-
-    // likes(){
-    //     this._likesPanel = document.querySelectorAll('.comment__likes-button')
-
-    //     this._likesPanel.forEach(panel => {
-    //         let count = 0
-    //         let this._result
-    //         let buttonMinus = panel.querySelector('.comment__likes-button-minus')
-    //         buttonMinus.addEventListener('click',()=>{
-    //             let panelText = panel.querySelector('.comment__likes-button-number')
-    //             count--
-
-    //             if(count<0){
-    //                 panelText.style.color = '#FF0000'
-    //                 this._result = count * (-1)
-    //             }else {
-    //                 this._result = count
-    //                 panelText.style.color = '#8ac540'
-
-    //             }
-    //             panelText.textContent = this._result
-    //         })
-    //         let buttonPlus = panel.querySelector('.comment__likes-button-plus')
-
-    //         buttonPlus.addEventListener('click',()=>{
-    //             let panelText = panel.querySelector('.comment__likes-button-number')
-    //             count++
-
-    //             if(count<0){
-    //                 panelText.style.color = '#FF0000'
-    //                 this._result = count * (-1)
-    //             } else {
-    //                 this._result = count
-
-    //                 panelText.style.color = '#8ac540'
-
-    //             }
-    //             panelText.textContent = this._result
-    //         })
-    //     });
-
-    // }
 }

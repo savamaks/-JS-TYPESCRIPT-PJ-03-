@@ -3,7 +3,7 @@ class SortMenu {
         this._blockTwo = blockTwo;
         this._arrowSorting = arrowSorting;
         this._main = main
-        this._arrowFlag = true;
+        
     }
 
     initSortMenu(arrList, menuSorting, raitingBlock) {
@@ -33,18 +33,38 @@ class SortMenu {
 
         //стрелка переворот списка
         this._arrowSorting.addEventListener("click", () => {
+            this._main.localMemory()
             this._arrowSorting.classList.toggle("rotate-arrow-sorting");
-            if (this._arrowFlag) {
-                console.log('1');
-                this._arrowFlag = false;
+            if (this._arrowSorting.classList.contains("rotate-arrow-sorting")) {
+                console.log(this._main._arrCom);
+                this._main._arrowFlag = false;
+                if(document.querySelector(".n0").classList.contains('active-item')){
+                    this._main.sortDate()
+                } else if(document.querySelector(".n1").classList.contains('active-item')){
+                    this._main.sortLikes()
+                }else if(document.querySelector(".n2").classList.contains('active-item')){
+                }else if(document.querySelector(".n3").classList.contains('active-item')){
+                    this._main.sortAmountAnser()
+
+                }
             } else {
-                this._arrowFlag = true;
+                console.log(this._main._arrCom);
+                this._main._arrowFlag = true;
+                if(document.querySelector(".n0").classList.contains('active-item')){
+                    this._main.sortDate()
+                } else if(document.querySelector(".n1").classList.contains('active-item')){
+                    this._main.sortLikes()
+                }else if(document.querySelector(".n2").classList.contains('active-item')){
+                }else if(document.querySelector(".n3").classList.contains('active-item')){
+                    this._main.sortAmountAnser()
+
+                }
             }
-            this._main.localMemory(this._arrowFlag)
-            this.dateSort(this._arrowFlag)
         });
     }
     dateSort(arrowFlag) {
-        
+        // if(){
+
+        // }
     }
 }
