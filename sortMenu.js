@@ -6,7 +6,7 @@ class SortMenu {
         
     }
 
-    initSortMenu(arrList, menuSorting, raitingBlock) {
+    initSortMenu({arrList, menuSorting, raitingBlock}) {
         menuSorting.textContent = arrList[0].text;
 
         arrList.forEach((element, index) => {
@@ -62,9 +62,12 @@ class SortMenu {
             }
         });
     }
-    dateSort(arrowFlag) {
-        // if(){
-
-        // }
+    positionRaitingBlock({e,arrList, menuSorting, raitingBlock}) {
+        let coords = menuSorting.getBoundingClientRect(); 
+        console.log(coords.top);
+        console.log(e.clientY);
+        raitingBlock.style.left = coords.left  +'px'
+        raitingBlock.style.top =  e.clientY +25 + 'px'
+        // console.log(raitingBlock.style.top);
     }
 }

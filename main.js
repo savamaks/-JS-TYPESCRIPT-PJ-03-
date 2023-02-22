@@ -80,11 +80,25 @@ class Main {
         this._countCommentText.textContent = `(${0})`;
 
         // this.r = localStorage.getItem(1)
-        this._sortMenu.initSortMenu(this._arrList, this._menuSorting, this._raitingBlock);
+        this._sortMenu.initSortMenu({
+            arrList: this._arrList,
+            menuSorting: this._menuSorting,
+            raitingBlock: this._raitingBlock,
+        });
 
-        this._menuSorting.addEventListener("click", () => {
+        this._menuSorting.addEventListener("click", (e) => {
+            this._sortMenu.positionRaitingBlock({
+                e:e,
+                arrList: this._arrList,
+                menuSorting: this._menuSorting,
+                raitingBlock: this._raitingBlock,
+            });
             this._raitingBlock.classList.toggle("active-menu");
         });
+
+        this._raitingBlock.addEventListener('mouseleave',(e)=>{
+            this._raitingBlock.classList.toggle("active-menu");
+        })
 
         document.querySelector(".n0").addEventListener("click", () => {
             this.localMemory();
