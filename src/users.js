@@ -1,6 +1,5 @@
-"use strict";
-class Users {
-    constructor() {
+var Users = /** @class */ (function () {
+    function Users() {
         this.comment = [
             {
                 name: "Алексей_1994b",
@@ -24,7 +23,7 @@ class Users {
                 favorites: "not-favorite",
                 parentName: "Алексей_1994b",
                 numberComment: 20230115135512,
-                key: 20230115151813,
+                key: 20230115151813
             },
             {
                 name: "Мистер_душнила",
@@ -35,8 +34,9 @@ class Users {
                 favorites: "not-favorite",
                 parentName: "Алексей_1994b",
                 numberComment: 20230115135512,
-                key: 20230211150214,
+                key: 20230211150214
             },
         ];
     }
-}
+    return Users;
+}());
