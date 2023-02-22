@@ -155,6 +155,7 @@ class Main {
 
         this.localMemory();
         this.sortDate();
+        
 
         // this._blockTwo.insertAdjacentHTML('afterbegin',this._menuSorting)
     }

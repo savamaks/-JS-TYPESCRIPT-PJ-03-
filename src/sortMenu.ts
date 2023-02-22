@@ -1,15 +1,18 @@
 class SortMenu {
-    constructor({ blockTwo, arrowSorting,main }) {
+    private _blockTwo: any;
+    private _arrowSorting: any;
+    private _main: any;
+    constructor({ blockTwo, arrowSorting,main }:any) {
         this._blockTwo = blockTwo;
         this._arrowSorting = arrowSorting;
         this._main = main
         
     }
 
-    initSortMenu({arrList, menuSorting, raitingBlock}) {
+    initSortMenu({arrList, menuSorting, raitingBlock}:any) {
         menuSorting.textContent = arrList[0].text;
 
-        arrList.forEach((element, index) => {
+        arrList.forEach((element:any, index:number) => {
             let listItem = ` 
     <p class="rating-block__item n${index} ${
                 index === 0 ? "active-item" : ""
@@ -19,14 +22,14 @@ class SortMenu {
 
             raitingBlock.innerHTML += listItem;
         });
-        raitingBlock.querySelectorAll(".rating-block__item").forEach((item) => {
+        raitingBlock.querySelectorAll(".rating-block__item").forEach((item: { addEventListener: (arg0: string, arg1: () => void) => void; }) => {
             item.addEventListener("click", function () {
-                this._num = this.dataset.index;
+                let _num:number = this.dataset.index;
                 raitingBlock.querySelector(".active-item").classList.remove("active-item");
-                raitingBlock.querySelector(".n" + this._num).classList.add("active-item");
+                raitingBlock.querySelector(".n" + _num).classList.add("active-item");
                 raitingBlock.querySelector(".active").classList.remove("active");
-                raitingBlock.querySelector(".image" + this._num).classList.add("active");
-                menuSorting.textContent = arrList[this._num].text;
+                raitingBlock.querySelector(".image" + _num).classList.add("active");
+                menuSorting.textContent = arrList[_num].text;
                 raitingBlock.classList.toggle("active-menu");
             });
         });
@@ -62,7 +65,7 @@ class SortMenu {
             }
         });
     }
-    positionRaitingBlock({e,arrList, menuSorting, raitingBlock}) {
+    positionRaitingBlock({e,arrList, menuSorting, raitingBlock}:any) {
         let coords = menuSorting.getBoundingClientRect(); 
         console.log(coords.top);
         console.log(e.clientY);

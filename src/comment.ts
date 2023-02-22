@@ -1,5 +1,41 @@
-class Comment {
-    constructor({ user, textInput, blockTwo, favorites, likes,  localMemory, main }) {
+class CommentCreate {
+    private _user: Users;
+    private _textInput: HTMLElement;
+    private _blockTwo: HTMLElement;
+    private _favorites: Favorites;
+    private _likes: Likes;
+    private _main: Main;
+    private _parentUpdateGet: any;
+    private _numberComment: number;
+    private _localMemory: LocalMemory;
+    private _amountChild: number|any;
+
+    mainDiv: HTMLDivElement|undefined;
+    commentDiv: HTMLDivElement|undefined;
+    imageAccount: HTMLImageElement|undefined;
+    signatureName: HTMLHeadingElement|undefined;
+    signatureDate: HTMLParagraphElement|undefined;
+    commentText: HTMLParagraphElement|undefined;
+    commentPanelDiv: HTMLDivElement|undefined;
+    panelButtonAnswer: HTMLButtonElement|undefined;
+    panelButtonAnswerImage: HTMLImageElement|undefined;
+    panelButtonFavorites: HTMLButtonElement|undefined;
+    panelButtonFavoritesImage: HTMLImageElement|undefined;
+    panelFavoritesDiv: HTMLDivElement|undefined;
+    buttonMinus: HTMLButtonElement|undefined;
+    buttonMinusImage: HTMLImageElement|undefined;
+    panelLikesDivText: HTMLParagraphElement|undefined;
+    buttonPlus: HTMLButtonElement|undefined;
+    buttonPlusImage: HTMLImageElement|undefined;
+    _parent: HTMLElement | null | undefined;
+    signatureNameAnswer: HTMLParagraphElement|undefined;
+    imageAnswer: HTMLImageElement|undefined;
+    _number: any|undefined;
+    _amountChildParent: any;
+    _amountChildParentNew: any;
+    _parentUpdate: any;
+    
+    constructor({ user, textInput, blockTwo, favorites, likes,  localMemory, main }:any) {
         this._user = user;
         this._textInput = textInput;
         this._blockTwo = blockTwo;
@@ -8,10 +44,14 @@ class Comment {
         this._main = main;
         this._numberComment=0
         this._localMemory = localMemory;
+        this._number
+        this._amountChildParent
+        this._amountChildParentNew
+        this._parentUpdate
     }
     
 
-    writeNewComment({ name, imageAccount, time, text, likes, favorites,key,reverse,amountChild }) {
+    writeNewComment({ name, imageAccount, time, text, likes, favorites,key,reverse,amountChild }:any) {
         // console.log(numberComment);
         // console.log(favorites)
         this.mainDiv = document.createElement("div");
@@ -159,14 +199,14 @@ class Comment {
 
 
 
-    handlerButtonAnswer(answer) {
+    handlerButtonAnswer(answer:any) {
         answer.addEventListener("click", () => {
-            this._main._parent = answer.parentElement.parentElement.parentElement;
-            this._main._parentName = this._main._parent.querySelector(".comment__name").textContent;
-            this._main._answerFlag = true;
-            console.log(this._main._parent,
-                this._main._parentName,
-                this._main._answerFlag)
+            this._main.parent = answer.parentElement.parentElement.parentElement;
+            this._main.parentName = this._main.parent.querySelector(".comment__name").textContent;
+            this._main.answerFlag = true;
+            console.log(this._main.parent,
+                this._main.parentName,
+                this._main.answerFlag)
             
         });
     }
@@ -174,7 +214,7 @@ class Comment {
 
 
 
-    writeAnswer({ name,imageAccount, parentName, time, text, parent, likes,favorites, numberComment,key,reverse }) {
+    writeAnswer({ name,imageAccount, parentName, time, text, parent, likes,favorites, numberComment,key,reverse }:any) {
         
         this._parent = document.querySelector(`[number-comment="${numberComment}"]`)?.parentElement
         
@@ -326,15 +366,16 @@ class Comment {
 
         } else{
             // console.log(this._parent);
-            this._number = this._parent.firstElementChild.getAttribute("number-comment")
+            this._number  = this._parent?.firstElementChild?.getAttribute("number-comment")
 
-            this._amountChildParent = this._parent.firstElementChild.getAttribute('amount-child')
-            this._parent.firstElementChild.setAttribute('amount-child', +this._amountChildParent+1)
-           
-            this._amountChildParentNew = this._parent.firstElementChild.getAttribute('amount-child')
+            this._amountChildParent = this._parent?.firstElementChild?.getAttribute('amount-child')
+            this._amountChild= +this._amountChildParent + 1
+            this._parent?.firstElementChild?.setAttribute('amount-child', this._amountChild)
+            
+            this._amountChildParentNew = this._parent?.firstElementChild?.getAttribute('amount-child')
         }
-
-        this._parentUpdate = JSON.parse(localStorage.getItem(this._number)) 
+        this._parentUpdateGet = localStorage.getItem(this._number)
+        this._parentUpdate = JSON.parse(this._parentUpdateGet) 
         // console.log(this._parentUpdate);
         // console.log(this._parentUpdate.key);
 

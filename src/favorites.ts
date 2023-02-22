@@ -1,12 +1,21 @@
 class Favorites {
-    constructor({ buttonFavorites, menuFavoritesButton, localMemory }) {
+    private _buttonFavorites: HTMLElement;
+    private _menuFavoritesButton: HTMLElement;
+    private _localMemory: LocalMemory;
+    private _favorites: string|undefined;
+    private _comment: HTMLElement|any;
+    private _imageComment: any;
+    private _favoritesComent: NodeList|undefined;
+    private _favoritesAnswer:  NodeList|undefined;
+
+    constructor({ buttonFavorites, menuFavoritesButton, localMemory }:any) {
         this._buttonFavorites = buttonFavorites;
         this._menuFavoritesButton = menuFavoritesButton;
         this._localMemory = localMemory;
         this._favorites;
     }
 
-    handlerButtonFavorites({ panelButtonFavorites, name,imageAccount, parentName, time, text,key }) {
+    handlerButtonFavorites({ panelButtonFavorites, name,imageAccount, parentName, time, text,key }:any) {
         //если открыты избранные сообщения,
         // то новое сообщение не видно в списке пока не закрыть избраное
         if (this._menuFavoritesButton.classList.contains("flag-favorite")) {
@@ -15,11 +24,11 @@ class Favorites {
 
         panelButtonFavorites.addEventListener("click", () => {
             this._comment = panelButtonFavorites.parentElement.parentElement;
-            this._comment.classList.toggle("flag-favorite");
+            this._comment?.classList.toggle("flag-favorite");
 
-            this._imageComment = this._comment.querySelector(".comment__panel-favorites-img");
+            this._imageComment = this._comment?.querySelector(".comment__panel-favorites-img");
             this._imageComment.src = "./image/flag-favorite.svg";
-            this._comment.setAttribute("favorites", "flag-favorite");
+            this._comment?.setAttribute("favorites", "flag-favorite");
             this._favorites = "flag-favorite";
             // console.log(this._imageComment)
             // panelButtonFavorites.remove()
@@ -28,13 +37,13 @@ class Favorites {
 
             // console.log("button favor");
 
-            if (!this._comment.classList.contains("flag-favorite")) {
+            if (!this._comment?.classList.contains("flag-favorite")) {
                 if (this._menuFavoritesButton.classList.contains("flag-favorite")) {
-                    this._comment.classList.add("not-favorite");
+                    this._comment?.classList.add("not-favorite");
                 }
                 this._imageComment.src = "./image/not-favorite.svg";
 
-                this._comment.setAttribute("favorites", "not-favorite");
+                this._comment?.setAttribute("favorites", "not-favorite");
                 this._favorites = "not-favorite";
                 // console.log("del favor");
             }
@@ -46,8 +55,8 @@ class Favorites {
                 time: time,
                 text: text,
                 favorites: this._favorites,
-                likes: `${this._comment.getAttribute("likes")}`,
-                numberComment: `${this._comment.parentElement.firstChild.getAttribute("number-comment")}`,
+                likes: `${this._comment?.getAttribute("likes")}`,
+                numberComment: `${this._comment?.parentElement?.firstChild?.getAttribute("number-comment")}`,
                 key:key,
             });
         });
@@ -59,7 +68,7 @@ class Favorites {
 
             this._favoritesComent = document.querySelectorAll(".comment");
 
-            this._favoritesComent.forEach((element) => {
+            this._favoritesComent.forEach((element:any) => {
                 if (!element.classList.contains("flag-favorite")) {
                     element.classList.toggle("not-favorite");
                 }
@@ -69,7 +78,7 @@ class Favorites {
             });
             this._favoritesAnswer = document.querySelectorAll(".answer");
 
-            this._favoritesAnswer.forEach((element) => {
+            this._favoritesAnswer.forEach((element:any) => {
                 if (!element.classList.contains("flag-favorite")) {
                     element.classList.toggle("not-favorite");
                 }
@@ -86,44 +95,3 @@ class Favorites {
 
 
 
-
-
-
-// handlerButtonFavorites(favorites, flag) {
-//     favorites.addEventListener("click", () => {
-//         console.log("main");
-//         if (flag) {
-//             console.log("app main");
-
-//             flag = false;
-//             this._comment = favorites.parentElement.parentElement;
-
-//             this._imageComment = this._comment.querySelector(".comment__panel-favorites-img");
-//             this._imageComment.src = "./image/полное сердце.svg";
-
-//             this._copyCommet = this._comment.cloneNode(true);
-//             this._blockFavorites.append(this._copyCommet);
-
-//             this.deleteFavoritesComment(this._copyCommet, flag);
-//         } else {
-//             console.log("delete main");
-//             this._imageComment.src = "./image/пустое сердце.svg";
-//             this._copyCommet.remove();
-//             flag = true;
-//         }
-//     });
-// }
-
-// deleteFavoritesComment(copyComment, flag) {
-//     this._favoritesButton = copyComment.querySelector(".comment__panel-favorites");
-//     console.log(this._favoritesButton);
-//     console.log(copyComment);
-
-//     this._favoritesButton.addEventListener("click", () => {
-//         this._imageComment.src = "./image/пустое сердце.svg";
-
-//         copyComment.remove();
-//         flag = true;
-//         console.log("del favor");
-//     });
-// }
