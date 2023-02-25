@@ -1,19 +1,20 @@
 class Likes {
-    _blockTwo: any;
-    _localMemory: any;
-    _localCount: any;
-    _result: any;
-    _comment: any;
-    _commentName: any;
-    _commentNameAnswer: any;
-    _commentDate: any;
-    _commentText: any;
+    private _blockTwo: HTMLElement;
+    private _localMemory: LocalMemory;
+    private _localCount: number|any;
+    private _result: number|any;
+    private _comment: any;
+    private _commentName: any;
+    private _commentNameAnswer: any;
+    private _commentDate: any;
+    private _commentText: any;
     constructor({ blockTwo, localMemory }:any) {
         this._blockTwo = blockTwo;
         this._localMemory = localMemory;
         this._localCount;
         this._result;
     }
+
 
     likesComment({ buttonMinus, panelLikesDivText, imageAccount, likes, buttonPlus,key}:any) {
         let count = likes === undefined ? 0 : likes;
@@ -59,10 +60,8 @@ class Likes {
             this.writeLocalMemory(buttonPlus, this._localCount,key,imageAccount);
         });
     }
-    writeLocalMemory(child, localCount,key) {
-        console.log('ok')
-        this._comment = child.parentElement.parentElement.parentElement;
-        // console.log(this._comment.getAttribute("attribute"));
+    writeLocalMemory(child:HTMLElement, localCount:number,key:number,imageAccount:string) {
+        this._comment = child?.parentElement?.parentElement?.parentElement;
 
         this._commentName = this._comment.querySelector('[attribute="name"]');
         this._commentNameAnswer =
@@ -71,7 +70,6 @@ class Likes {
         this._commentText = this._comment.querySelector('[attribute="text"]');
         this._comment.setAttribute("likes",`${localCount}`)
         
-        // console.log(this._comment.parentElement.firstChild);
 
         this._localMemory.writeCommentMemory({
             name: this._commentName.textContent,
@@ -82,6 +80,8 @@ class Likes {
             likes: localCount,
             favorites:this._comment.getAttribute("favorites"),
             numberComment:this._comment.parentElement.firstChild.getAttribute("number-comment"),
+            amountChild:this._comment.parentElement.firstChild.getAttribute("amount-child"),
+            timeLastAnswer:this._comment.parentElement.firstChild.getAttribute("last-write-answer"),
             key:key,
         });
     }

@@ -1,21 +1,24 @@
-var SortMenu = /** @class */ (function () {
-    function SortMenu(_a) {
-        var blockTwo = _a.blockTwo, arrowSorting = _a.arrowSorting, main = _a.main;
+"use strict";
+class SortMenu {
+    constructor({ blockTwo, arrowSorting, main }) {
         this._blockTwo = blockTwo;
         this._arrowSorting = arrowSorting;
         this._main = main;
+        this._buttonSortDate;
+        this._buttonSortLikes;
+        this._buttonSort;
+        this._buttonSortAnswer;
     }
-    SortMenu.prototype.initSortMenu = function (_a) {
-        var _this = this;
-        var arrList = _a.arrList, menuSorting = _a.menuSorting, raitingBlock = _a.raitingBlock;
+    initSortMenu({ arrList, menuSorting, raitingBlock }) {
         menuSorting.textContent = arrList[0].text;
-        arrList.forEach(function (element, index) {
-            var listItem = " \n    <p class=\"rating-block__item n".concat(index, " ").concat(index === 0 ? "active-item" : "", " \" data-index=\"").concat(index, "\"\"><img src=\"./image/icons8-\u0433\u0430\u043B\u043E\u0447\u043A\u0430-96 1.svg\" class=\"rating-block__item-image image").concat(index, " ").concat(index === 0 ? "active" : "", " \" alt=\"").concat(index, "\">").concat(arrList[index].text, "</p>");
+        arrList.forEach((element, index) => {
+            let listItem = ` 
+    <p class="rating-block__item n${index} ${index === 0 ? "active-item" : ""} " data-index="${index}""><img src="./image/icons8-галочка-96 1.svg" class="rating-block__item-image image${index} ${index === 0 ? "active" : ""} " alt="${index}">${arrList[index].text}</p>`;
             raitingBlock.innerHTML += listItem;
         });
-        raitingBlock.querySelectorAll(".rating-block__item").forEach(function (item) {
-            item.addEventListener("click", function () {
-                var _num = this.dataset.index;
+        raitingBlock.querySelectorAll(".rating-block__item").forEach((item) => {
+            item.addEventListener("click", () => {
+                let _num = item.dataset.index;
                 raitingBlock.querySelector(".active-item").classList.remove("active-item");
                 raitingBlock.querySelector(".n" + _num).classList.add("active-item");
                 raitingBlock.querySelector(".active").classList.remove("active");
@@ -24,50 +27,50 @@ var SortMenu = /** @class */ (function () {
                 raitingBlock.classList.toggle("active-menu");
             });
         });
+        this._buttonSortDate = document.querySelector(".n0");
+        this._buttonSortLikes = document.querySelector(".n1");
+        this._buttonSortActuality = document.querySelector(".n2");
+        this._buttonSortAnswer = document.querySelector(".n3");
         //стрелка переворот списка
-        this._arrowSorting.addEventListener("click", function () {
-            _this._main.localMemory();
-            _this._arrowSorting.classList.toggle("rotate-arrow-sorting");
-            if (_this._arrowSorting.classList.contains("rotate-arrow-sorting")) {
-                console.log(_this._main._arrCom);
-                _this._main._arrowFlag = false;
-                if (document.querySelector(".n0").classList.contains('active-item')) {
-                    _this._main.sortDate();
+        this._arrowSorting.addEventListener("click", () => {
+            var _a, _b, _c, _d, _e, _f, _g, _h;
+            this._main.localMemory();
+            this._arrowSorting.classList.toggle("rotate-arrow-sorting");
+            if (this._arrowSorting.classList.contains("rotate-arrow-sorting")) {
+                this._main.arrowFlag = false;
+                if ((_a = this._buttonSortDate) === null || _a === void 0 ? void 0 : _a.classList.contains("active-item")) {
+                    this._main.sortDate();
                 }
-                else if (document.querySelector(".n1").classList.contains('active-item')) {
-                    _this._main.sortLikes();
+                else if ((_b = this._buttonSortLikes) === null || _b === void 0 ? void 0 : _b.classList.contains("active-item")) {
+                    this._main.sortLikes();
                 }
-                else if (document.querySelector(".n2").classList.contains('active-item')) {
+                else if ((_c = this._buttonSortActuality) === null || _c === void 0 ? void 0 : _c.classList.contains("active-item")) {
+                    this._main.sortActuality();
                 }
-                else if (document.querySelector(".n3").classList.contains('active-item')) {
-                    _this._main.sortAmountAnser();
+                else if ((_d = this._buttonSortAnswer) === null || _d === void 0 ? void 0 : _d.classList.contains("active-item")) {
+                    this._main.sortAmountAnser();
                 }
             }
             else {
-                console.log(_this._main._arrCom);
-                _this._main._arrowFlag = true;
-                if (document.querySelector(".n0").classList.contains('active-item')) {
-                    _this._main.sortDate();
+                this._main.arrowFlag = true;
+                if ((_e = this._buttonSortDate) === null || _e === void 0 ? void 0 : _e.classList.contains("active-item")) {
+                    this._main.sortDate();
                 }
-                else if (document.querySelector(".n1").classList.contains('active-item')) {
-                    _this._main.sortLikes();
+                else if ((_f = this._buttonSortLikes) === null || _f === void 0 ? void 0 : _f.classList.contains("active-item")) {
+                    this._main.sortLikes();
                 }
-                else if (document.querySelector(".n2").classList.contains('active-item')) {
+                else if ((_g = this._buttonSortActuality) === null || _g === void 0 ? void 0 : _g.classList.contains("active-item")) {
+                    this._main.sortActuality();
                 }
-                else if (document.querySelector(".n3").classList.contains('active-item')) {
-                    _this._main.sortAmountAnser();
+                else if ((_h = this._buttonSortAnswer) === null || _h === void 0 ? void 0 : _h.classList.contains("active-item")) {
+                    this._main.sortAmountAnser();
                 }
             }
         });
-    };
-    SortMenu.prototype.positionRaitingBlock = function (_a) {
-        var e = _a.e, arrList = _a.arrList, menuSorting = _a.menuSorting, raitingBlock = _a.raitingBlock;
-        var coords = menuSorting.getBoundingClientRect();
-        console.log(coords.top);
-        console.log(e.clientY);
-        raitingBlock.style.left = coords.left + 'px';
-        raitingBlock.style.top = e.clientY + 25 + 'px';
-        // console.log(raitingBlock.style.top);
-    };
-    return SortMenu;
-}());
+    }
+    positionRaitingBlock({ e, menuSorting, raitingBlock }) {
+        let coords = menuSorting.getBoundingClientRect();
+        raitingBlock.style.left = coords.left + "px";
+        raitingBlock.style.top = e.clientY + 25 + "px";
+    }
+}

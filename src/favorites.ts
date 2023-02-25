@@ -1,3 +1,4 @@
+
 class Favorites {
     private _buttonFavorites: HTMLElement;
     private _menuFavoritesButton: HTMLElement;
@@ -7,6 +8,7 @@ class Favorites {
     private _imageComment: any;
     private _favoritesComent: NodeList|undefined;
     private _favoritesAnswer:  NodeList|undefined;
+
 
     constructor({ buttonFavorites, menuFavoritesButton, localMemory }:any) {
         this._buttonFavorites = buttonFavorites;
@@ -30,13 +32,7 @@ class Favorites {
             this._imageComment.src = "./image/flag-favorite.svg";
             this._comment?.setAttribute("favorites", "flag-favorite");
             this._favorites = "flag-favorite";
-            // console.log(this._imageComment)
-            // panelButtonFavorites.remove()
-            // panelButtonFavorites.append(this._imageComment + 'В избраном')  
-            // console.log(panelButtonFavorites)
-
-            // console.log("button favor");
-
+            
             if (!this._comment?.classList.contains("flag-favorite")) {
                 if (this._menuFavoritesButton.classList.contains("flag-favorite")) {
                     this._comment?.classList.add("not-favorite");
@@ -45,9 +41,7 @@ class Favorites {
 
                 this._comment?.setAttribute("favorites", "not-favorite");
                 this._favorites = "not-favorite";
-                // console.log("del favor");
             }
-        // console.log(this._comment.parentElement.firstChild);
             this._localMemory.writeCommentMemory({
                 name: name,
                 imageAccount:imageAccount,
@@ -56,8 +50,10 @@ class Favorites {
                 text: text,
                 favorites: this._favorites,
                 likes: `${this._comment?.getAttribute("likes")}`,
-                numberComment: `${this._comment?.parentElement?.firstChild?.getAttribute("number-comment")}`,
+                numberComment: `+${this._comment?.parentElement?.firstChild?.getAttribute("number-comment")}`,
                 key:key,
+                amountChild:`${this._comment?.parentElement?.firstChild?.getAttribute("amount-child")}`,
+                timeLastAnswer:`${this._comment?.parentElement?.firstChild?.getAttribute("last-write-answer")}`
             });
         });
     }

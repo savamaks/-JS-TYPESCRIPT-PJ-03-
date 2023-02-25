@@ -1,10 +1,13 @@
 class LocalMemory {
-    constructor({ countCommentText }) {
+    private _arr: object|undefined
+    private _arrJson: any;
+    private _countCommentText: any;
+    constructor({ countCommentText }:any) {
         this._arr;
         this._arrJson;
         this._countCommentText = countCommentText;
     }
-    writeCommentMemory({ name, imageAccount, parentName, time, text, likes, favorites, numberComment, key, amountChild }:any) {
+    writeCommentMemory({ name, imageAccount, parentName, time, text, likes, favorites, numberComment, key, amountChild,timeLastAnswer }:any) {
         // console.log(amountChild);
         // let parentJson = JSON.stringify(parent)
         // console.log(parentJson)
@@ -18,7 +21,8 @@ class LocalMemory {
             favorites: favorites,
             numberComment: numberComment,
             key: key,
-            amountChild: amountChild
+            amountChild: amountChild,
+            timeLastAnswer:timeLastAnswer,
         };
         this._arrJson = JSON.stringify(this._arr);
         localStorage.setItem(key, this._arrJson);

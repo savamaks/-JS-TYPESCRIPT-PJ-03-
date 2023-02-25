@@ -1,5 +1,6 @@
-var Users = /** @class */ (function () {
-    function Users() {
+"use strict";
+class Users {
+    constructor() {
         this.comment = [
             {
                 name: "Алексей_1994b",
@@ -8,9 +9,10 @@ var Users = /** @class */ (function () {
                 text: "Самое обидное когда сценарий по сути есть - в виде книг, где нет сюжетных дыр, всё логично, стройное повествование и достаточно взять и экранизировать оригинал как это было в первых фильмах с минимальным количеством отсебятины и зритель с восторгом примет любой такой фильм и сериал, однако вместо этого 'Кольца власти' просто позаимствовали имена из оригинала, куски истории, мало связанные между собой и выдали очередной среднячковый сериал на один раз в лучшем случае.",
                 likes: 6,
                 favorites: "flag-favorite",
-                numberComment: 20230115135512,
-                key: 20230115135512,
-                amountChild: 2
+                numberComment: 20220115135512,
+                key: 20220115135512,
+                amountChild: 2,
+                timeLastAnswer: 20220211150214,
             },
         ];
         this.answer = [
@@ -22,8 +24,8 @@ var Users = /** @class */ (function () {
                 likes: 3,
                 favorites: "not-favorite",
                 parentName: "Алексей_1994b",
-                numberComment: 20230115135512,
-                key: 20230115151813
+                numberComment: 20220115135512,
+                key: 20220115151813,
             },
             {
                 name: "Мистер_душнила",
@@ -33,10 +35,9 @@ var Users = /** @class */ (function () {
                 likes: -5,
                 favorites: "not-favorite",
                 parentName: "Алексей_1994b",
-                numberComment: 20230115135512,
-                key: 20230211150214
+                numberComment: 20220115135512,
+                key: 20220211150214,
             },
         ];
     }
-    return Users;
-}());
+}
