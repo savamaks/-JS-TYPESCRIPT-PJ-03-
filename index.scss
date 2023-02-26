@@ -87,6 +87,7 @@ button {
     // .menu__comments
 
     &__box-comment {
+        margin: 0 50px 0 0 ;
         max-width: 190px;
         display: flex;
         margin-top: 20px;
@@ -99,6 +100,12 @@ button {
         border-bottom: #000000 5px solid;
     }
 
+    //.menu__box
+
+    &__box {
+        display: flex;
+
+    }
     //.menu__box-comment-count
 
     &__box-comment-count {
@@ -108,8 +115,7 @@ button {
     // .menu__sorting
 
     &__sorting {
-        min-width: 62px ;
-        margin: 0 0 0 50px;
+        min-width: 62px;
         margin-top: 20px;
         font-family: "Inter";
         font-style: normal;
@@ -498,7 +504,7 @@ button {
     margin: 30px 0 0 90px;
     max-width: 916px;
     display: grid;
-    grid-auto-columns: auto;
+    grid-auto-columns: min-content min-content min-content  auto;
     grid-auto-rows: min-content max-content min-content;
     grid-template-areas:
         "A B C D ."
@@ -700,7 +706,6 @@ button {
         // .menu__sorting
 
         &__sorting {
-
         }
 
         // .menu__rating
@@ -751,7 +756,7 @@ button {
         // .new-comments__amount
 
         &__amount {
-            margin: 0 15px 0 0;
+            margin: 0 30px 0 0;
             justify-self: end;
             font-size: 10px;
             line-height: 12px;

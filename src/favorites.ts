@@ -17,7 +17,7 @@ class Favorites {
         this._favorites;
     }
 
-    handlerButtonFavorites({ panelButtonFavorites, name,imageAccount, parentName, time, text,key }:any) {
+    handlerButtonFavorites({ panelButtonFavorites, name,imageAccount, likes, parentName, time, text,key }:any) {
         //если открыты избранные сообщения,
         // то новое сообщение не видно в списке пока не закрыть избраное
         if (this._menuFavoritesButton.classList.contains("flag-favorite")) {
@@ -51,7 +51,7 @@ class Favorites {
                 time: time,
                 text: text,
                 favorites: this._favorites,
-                likes: `${this._comment?.getAttribute("likes")}`,
+                likes: likes === undefined? 0 : likes,
                 numberComment: `${this._comment?.parentElement?.firstChild?.getAttribute("number-comment")}`,
                 key:key,
                 amountChild:`${this._comment?.parentElement?.firstChild?.getAttribute("amount-child")}`,

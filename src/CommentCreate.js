@@ -68,7 +68,7 @@ class CommentCreate {
         if (likes < 0) {
             this.panelLikesDivText.style.color = "#FF0000";
         }
-        this.panelLikesDivText.textContent = likes === undefined ? 0 : likes;
+        this.panelLikesDivText.textContent = likes === undefined ? 0 : likes < 0 ? likes * -1 : likes;
         this.panelLikesDivText.setAttribute("attribute", "likes");
         this.buttonPlus = document.createElement("button");
         this.buttonPlus.classList.add("comment__likes-button-plus");
@@ -98,6 +98,7 @@ class CommentCreate {
             panelButtonFavorites: this.panelButtonFavorites,
             name: this.signatureName.textContent,
             imageAccount: imageAccount,
+            likes: likes,
             time: time,
             text: text,
             key: key,
@@ -117,7 +118,7 @@ class CommentCreate {
             imageAccount: imageAccount,
             time: time,
             text: text,
-            likes: this.panelLikesDivText.textContent,
+            likes: likes,
             favorites: this.commentDiv.getAttribute("favorites"),
             numberComment: key,
             key: key,
@@ -187,7 +188,7 @@ class CommentCreate {
         if (likes < 0) {
             this.panelLikesDivText.style.color = "#FF0000";
         }
-        this.panelLikesDivText.textContent = likes === undefined ? 0 : likes;
+        this.panelLikesDivText.textContent = likes === undefined ? 0 : likes < 0 ? likes * -1 : likes;
         this.panelLikesDivText.setAttribute("attribute", "likes");
         this.buttonPlus = document.createElement("button");
         this.buttonPlus.classList.add("answer__likes-button-plus");
@@ -211,6 +212,7 @@ class CommentCreate {
             name: this.signatureName.textContent,
             imageAccount: imageAccount,
             parentName: parentName,
+            likes: likes,
             time: time,
             text: text,
             key: key,
@@ -263,7 +265,7 @@ class CommentCreate {
             parentName: parentName,
             time: time,
             text: text,
-            likes: this.panelLikesDivText.textContent,
+            likes: likes,
             favorites: this.commentDiv.getAttribute("favorites"),
             numberComment: this._number ? this._number : numberComment,
             key: key,

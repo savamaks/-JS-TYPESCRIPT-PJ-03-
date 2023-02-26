@@ -106,6 +106,7 @@ button {
           align-items: center;
 }
 .menu__box-comment {
+  margin: 0 50px 0 0;
   max-width: 190px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -119,12 +120,16 @@ button {
   color: #000000;
   border-bottom: #000000 5px solid;
 }
+.menu__box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
 .menu__box-comment-count {
   opacity: 0.4;
 }
 .menu__sorting {
   min-width: 62px;
-  margin: 0 0 0 50px;
   margin-top: 20px;
   font-family: "Inter";
   font-style: normal;
@@ -604,7 +609,8 @@ button {
   max-width: 916px;
   display: -ms-grid;
   display: grid;
-  grid-auto-columns: auto;
+  grid-auto-columns: -webkit-min-content -webkit-min-content -webkit-min-content auto;
+  grid-auto-columns: min-content min-content min-content auto;
   grid-auto-rows: -webkit-min-content -webkit-max-content -webkit-min-content;
   grid-auto-rows: min-content max-content min-content;
       grid-template-areas: "A B C D ." "A E E E E" "A F F F F";
@@ -867,7 +873,7 @@ button {
     padding: 10px 0 6px 20px;
   }
   .new-comments__amount {
-    margin: 0 15px 0 0;
+    margin: 0 30px 0 0;
     -ms-grid-column-align: end;
         justify-self: end;
     font-size: 10px;
