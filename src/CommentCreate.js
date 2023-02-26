@@ -118,7 +118,7 @@ class CommentCreate {
             imageAccount: imageAccount,
             time: time,
             text: text,
-            likes: likes,
+            likes: likes === undefined ? 0 : likes,
             favorites: this.commentDiv.getAttribute("favorites"),
             numberComment: key,
             key: key,
