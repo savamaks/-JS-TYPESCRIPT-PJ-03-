@@ -51,8 +51,7 @@ class CommentCreate {
     }
 
     writeNewComment({ name, imageAccount, time, text, likes, favorites, key, arrowFlag, amountChild }: any) {
-        // console.log(numberComment);
-        // console.log(favorites)
+        
         this.mainDiv = document.createElement("div");
         this.mainDiv.classList.add("main-div");
 
@@ -64,7 +63,6 @@ class CommentCreate {
         this.commentDiv.setAttribute("likes", likes === undefined ? 0 : likes);
         this.commentDiv.setAttribute("favorites", `${favorites === undefined ? "not-favorite" : favorites}`);
         this.commentDiv.setAttribute("last-write-answer", `00000000000000`)
-        // console.log(num)                               
         this.commentDiv.setAttribute("number-comment", `${key}`);
         this.imageAccount = document.createElement("img");
         this.imageAccount.classList.add("comment__image");
@@ -119,10 +117,8 @@ class CommentCreate {
         if (likes < 0) {
             this.panelLikesDivText.style.color = "#FF0000";
         }
-        // console.log(likes);
         this.panelLikesDivText.textContent = likes === undefined ? 0 : likes;
 
-        // > 0? likes: likes*(-1);
         this.panelLikesDivText.setAttribute("attribute", "likes");
 
         this.buttonPlus = document.createElement("button");
@@ -135,7 +131,7 @@ class CommentCreate {
         this.commentDiv.append(this.imageAccount, this.signatureName, this.signatureDate, this.commentText, this.commentPanelDiv);
         this.commentPanelDiv.append(this.panelButtonAnswer, this.panelButtonFavorites, this.panelFavoritesDiv);
         this.panelButtonAnswer.append(this.panelButtonAnswerImage, "Ответить");
-        this.panelButtonFavorites.append(this.panelButtonFavoritesImage, "В избранное");
+        this.panelButtonFavorites.append(this.panelButtonFavoritesImage, `${favorites === undefined ? "В избранное" : favorites=== 'not-favorite'? 'В избранное':'В избранном'}`);
         this.buttonMinus.append(this.buttonMinusImage);
         this.buttonPlus.append(this.buttonPlusImage);
         this.panelFavoritesDiv.append(this.buttonMinus, this.panelLikesDivText, this.buttonPlus);
@@ -191,7 +187,6 @@ class CommentCreate {
             this._main.parent = answer?.parentElement?.parentElement?.parentElement;
             this._main.parentName = this._main.parent.querySelector(".comment__name").textContent;
             this._main.answerFlag = true;
-            console.log(this._main.parent, this._main.parentName, this._main.answerFlag);
         });
     }
 
@@ -287,7 +282,7 @@ class CommentCreate {
 
         this.commentPanelDiv.append(this.panelButtonFavorites, this.panelFavoritesDiv);
 
-        this.panelButtonFavorites.append(this.panelButtonFavoritesImage, "В избранное");
+        this.panelButtonFavorites.append(this.panelButtonFavoritesImage, `${favorites === undefined ? "В избранное" : favorites=== 'not-favorite'? 'В избранное':'В избранном'}`);
 
         this.buttonMinus.append(this.buttonMinusImage);
         this.buttonPlus.append(this.buttonPlusImage);

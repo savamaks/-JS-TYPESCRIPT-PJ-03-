@@ -28,16 +28,18 @@ class Favorites {
             this._comment = panelButtonFavorites.parentElement.parentElement;
             this._comment?.classList.toggle("flag-favorite");
 
-            this._imageComment = this._comment?.querySelector(".comment__panel-favorites-img");
-            this._imageComment.src = "./image/flag-favorite.svg";
+            // this._imageComment = this._comment?.querySelector(".comment__panel-favorites-img");
+            // this._imageComment.src = "./image/flag-favorite.svg";
             this._comment?.setAttribute("favorites", "flag-favorite");
             this._favorites = "flag-favorite";
+            panelButtonFavorites.innerHTML =`<img class="comment__panel-favorites-img" src="./image/flag-favorite.svg" alt="button favorites">В избранном`
             
             if (!this._comment?.classList.contains("flag-favorite")) {
                 if (this._menuFavoritesButton.classList.contains("flag-favorite")) {
                     this._comment?.classList.add("not-favorite");
                 }
-                this._imageComment.src = "./image/not-favorite.svg";
+                // this._imageComment.src = "./image/not-favorite.svg";
+                panelButtonFavorites.innerHTML =`<img class="comment__panel-favorites-img" src="./image/not-favorite.svg" alt="button favorites">В избранное`
 
                 this._comment?.setAttribute("favorites", "not-favorite");
                 this._favorites = "not-favorite";
@@ -50,7 +52,7 @@ class Favorites {
                 text: text,
                 favorites: this._favorites,
                 likes: `${this._comment?.getAttribute("likes")}`,
-                numberComment: `+${this._comment?.parentElement?.firstChild?.getAttribute("number-comment")}`,
+                numberComment: `${this._comment?.parentElement?.firstChild?.getAttribute("number-comment")}`,
                 key:key,
                 amountChild:`${this._comment?.parentElement?.firstChild?.getAttribute("amount-child")}`,
                 timeLastAnswer:`${this._comment?.parentElement?.firstChild?.getAttribute("last-write-answer")}`
